@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: dtb
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
