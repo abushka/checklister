@@ -13,10 +13,11 @@ from tgbot.handlers import utils
 
 from tgbot.tasks import broadcast_message
 
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = [
-        'user_id', 'username', 'first_name', 'last_name', 
+        'user_id', 'username', 'first_name', 'last_name',
         'language_code', 'deep_link',
         'created_at', 'updated_at', "is_blocked_bot",
     ]
@@ -36,7 +37,8 @@ class UserAdmin(admin.ModelAdmin):
             # TODO: for all platforms?
             if len(queryset) <= 3 or DEBUG:  # for test / debug purposes - run in same thread
                 for u in queryset:
-                    utils.send_message(user_id=u.id, text=broadcast_message_text, parse_mode=telegram.ParseMode.MARKDOWN)
+                    utils.send_message(user_id=u.user_id, text=broadcast_message_text,
+                                       parse_mode=telegram.ParseMode.MARKDOWN)
                 self.message_user(request, "Just broadcasted to %d users" % len(queryset))
             else:
                 user_ids = list(set(u.user_id for u in queryset))
@@ -48,8 +50,9 @@ class UserAdmin(admin.ModelAdmin):
 
         form = BroadcastForm(initial={'_selected_action': queryset.values_list('user_id', flat=True)})
         return render(
-            request, "admin/broadcast_message.html", {'items': queryset,'form': form, 'title':u' '}
+            request, "admin/broadcast_message.html", {'items': queryset, 'form': form, 'title': u' '}
         )
+
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
