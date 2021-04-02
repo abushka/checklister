@@ -134,3 +134,5 @@ dmypy.json
 
 #Docker
 .Dockerfile.swp
+
+tgbot/persistence_file

@@ -7,7 +7,7 @@ from telegram.ext import (
     Updater, Dispatcher, Filters,
     CommandHandler, MessageHandler,
     InlineQueryHandler, CallbackQueryHandler,
-    ChosenInlineResultHandler,
+    ChosenInlineResultHandler, BasePersistence
 )
 
 from celery.decorators import task  # event processing in async mode
@@ -15,7 +15,6 @@ from celery.decorators import task  # event processing in async mode
 from dtb.settings import TELEGRAM_TOKEN
 
 from tgbot.main import receiver, main_menu
-
 
 def setup_dispatcher(dp):
     """
