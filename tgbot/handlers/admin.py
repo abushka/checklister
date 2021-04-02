@@ -8,6 +8,7 @@ import telegram
 from tgbot.handlers import static_text
 from tgbot.models import User
 
+
 def admin(update, context):
     """ Show help info about all secret admins commands """
     u = User.get_user(update, context)
@@ -33,4 +34,3 @@ def stats(update, context):
         parse_mode=telegram.ParseMode.MARKDOWN,
         disable_web_page_preview=True,
     )
-    
