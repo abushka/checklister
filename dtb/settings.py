@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # local apps
     'tgbot.apps.TgbotConfig',
+    'djangosite.apps.DjangositeConfig',
 ]
 
 MIDDLEWARE = [

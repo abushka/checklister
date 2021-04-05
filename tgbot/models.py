@@ -4,6 +4,37 @@ from django.db import models
 from tgbot import utils
 
 
+class Text(models.Model):
+    model = models.CharField(max_length=32, null=False, blank=False)
+    lang = models.CharField(max_length=10, null=False, blank=False)
+    text = models.CharField(max_length=220, null=False, blank=True)
+
+    def __str__(self):
+        return f'{self.text}'
+
+
+class Category(models.Model):
+    name = models.ManyToManyField(Text, through='Locales')
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.SET_NULL)
+
+    def __str__(self):
+        name = self.name.objects.get(lang='ru')
+        return f'{self.name} {name}'
+
+
+class Locales(models.Model):
+    text = models.ForeignKey(Text, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+
+class Product(models.Model):
+    price = models.IntegerField()
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, related_name='products')
+    is_deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    created_time = models.DateTimeField(auto_created=True)
+
+
 class User(models.Model):
     user_id = models.IntegerField(primary_key=True)
     username = models.CharField(max_length=32, null=True, blank=True)

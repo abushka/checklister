@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('tgadmin/', admin.site.urls),
-    path('', include('tgbot.urls')),
+    path('tgbot', include('tgbot.urls')),
+    path('', include('djangosite.urls')),
 ]

@@ -3,15 +3,27 @@ import telegram
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django import forms
 
 from dtb.settings import DEBUG
 
-from tgbot.models import Location, Arcgis
+from tgbot.models import Location, Arcgis, Category, Text
 from tgbot.models import User, UserActionLog
 from tgbot.forms import BroadcastForm
 from tgbot.handlers import utils
 
 from tgbot.tasks import broadcast_message
+
+
+class CategoryInlineAdmin(admin.TabularInline):
+    model = Category.name.through
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    fields = ['parent']
+
+    inlines = (CategoryInlineAdmin, )
 
 
 @admin.register(User)
