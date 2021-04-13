@@ -151,22 +151,22 @@ ENABLE_DECORATOR_LOGGING = os.getenv('ENABLE_DECORATOR_LOGGING', True)
 
 
 # -----> SENTRY
-# import sentry_sdk
-# from sentry_sdk.integrations.django import DjangoIntegration
-# from sentry_sdk.integrations.celery import CeleryIntegration
-# from sentry_sdk.integrations.redis import RedisIntegration
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
 
-# sentry_sdk.init(
-#     dsn="INPUT ...ingest.sentry.io/ LINK",
-#     integrations=[
-#         DjangoIntegration(),
-#         CeleryIntegration(),
-#         RedisIntegration(),
-#     ],
-#     traces_sample_rate=0.1,
+sentry_sdk.init(
+    dsn="https://c07385d7a1f5411597736342dc797a49@o570293.ingest.sentry.io/5717014",
+    integrations=[
+        DjangoIntegration(),
+        CeleryIntegration(),
+        RedisIntegration(),
+    ],
+    traces_sample_rate=0.1,
 
-#     # If you wish to associate users to errors (assuming you are using
-#     # django.contrib.auth) you may enable sending PII data.
-#     send_default_pii=True
-# )
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 

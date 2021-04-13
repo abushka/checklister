@@ -27,4 +27,4 @@ django-celery-beat
 python-telegram-bot
 
 # monitoring
-# sentry-sdk
+sentry-sdk
